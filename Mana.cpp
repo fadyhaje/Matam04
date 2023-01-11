@@ -10,8 +10,8 @@ Card* Mana::clone() const {
 }
 
 void Mana :: applyEncounter(Player& player) const{
-    const  Wizard* wizard = dynamic_cast<const  Wizard*>(&player);
-    if (wizard !=nullptr) {
+    const  Healer* healer = dynamic_cast<const  Healer*>(&player);
+    if (healer !=nullptr) {
         player.heal(m_heal);
         printManaMessage(true);
     }
