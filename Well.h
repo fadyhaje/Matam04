@@ -3,7 +3,7 @@
 
 #include "Card.h"
 #include "../utilities.h"
-#include "../Players/Rogue.h"
+#include "../Players/Ninja.h"
 
 #define DEFAULT_DAMAGE_Well 10
 
