@@ -4,7 +4,7 @@
 #define DEFAULT_HEAL_Mana 10
 
 #include "Card.h" 
-#include "../Players/Wizard.h"
+#include "../Players/Healer.h"
 #include "../utilities.h"
 
 class Mana : public Card{
