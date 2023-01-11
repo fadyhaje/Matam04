@@ -1,6 +1,6 @@
 #include "Barfight.h"
 #include "../Players/Player.h"
-#include "../Players/Fighter.h"
+#include "../Players/Warrior.h"
 #include "../utilities.h"
 
 Barfight :: Barfight(): m_damage( DEFAULT_DAMAGE_BARFIGHT) {} 
@@ -13,8 +13,8 @@ Card* Barfight::clone() const {
 
 
 void Barfight :: applyEncounter(Player& player) const{
-    const Fighter* fighter = dynamic_cast<const Fighter*>(&player);
-    if (fighter == nullptr) {
+    const Warrior* warrior = dynamic_cast<const Warrior*>(&player);
+    if (warrior == nullptr) {
         player.damage(m_damage);
         printBarfightMessage(false);
     }
