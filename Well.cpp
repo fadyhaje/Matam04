@@ -6,8 +6,8 @@ Well :: Well(){
 
 
 void Well :: applyEncounter(Player& player)const {
-    const Rogue* rogue = dynamic_cast<const Rogue*>(&player);
-    if (rogue == nullptr) {
+    const Ninja* ninja = dynamic_cast<const Ninja*>(&player);
+    if (ninja == nullptr) {
         player.damage(m_damage);
         printWellMessage(false);
     }
