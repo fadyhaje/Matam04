@@ -11,11 +11,10 @@ using namespace std;
 class Player{
 private:
     char* m_name;
-
     int m_maxHP;
     int m_HP;
-    int m_coins;
 protected:
+    int m_coins;
     int m_level;
     int m_force;
 public:
