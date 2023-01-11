@@ -26,6 +26,6 @@ Card* Gremlin::clone() const {
 
 
 void Gremlin::printInfo(std::ostream& os ) const{
-    printCardDetails(os, "Gremoin");
+    printCardDetails(os, "Gremlin");
     printMonsterDetails(os,m_force,m_damage,m_loot);
 }
