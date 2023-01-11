@@ -39,7 +39,7 @@ class Gremlin : public BattleCard{
 
 
     /*
-    * create a new copy of Goblin using the copy c’tor
+    * create a new copy of Gremlin using the copy c’tor
     *
     * return:
     *   pointer to a copy of Gremlin
