@@ -122,6 +122,11 @@ public:
     //Player()  {}
 
     virtual Player* clone() const=0;
+    
+    virtual void printInfo(std::ostream& os ) const=0;
+
+    friend std::ostream& operator<<(std::ostream& os,const Player& player);
+
 };
 
 
