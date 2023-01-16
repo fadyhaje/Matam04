@@ -10,10 +10,11 @@ using namespace std;
 
 class Player{
 private:
-    char* m_name;
+    
     int m_maxHP;
-    int m_HP;
 protected:
+     int m_HP;
+    string m_name;
     int m_coins;
     int m_level;
     int m_force;
@@ -25,7 +26,7 @@ public:
      * @param maxHP - the max hp of the player (default = 100)
      * @param force - the force of the player(default = 5)
      */
-    Player(const char* name,int maxHP=100,int force=5);
+    Player(const string name,int maxHP=100,int force=5);
 
     /**
      * @brief Copy constructor of the Player
