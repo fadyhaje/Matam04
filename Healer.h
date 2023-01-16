@@ -6,7 +6,7 @@
 #define HEALER_H
 class Healer: public Player{
 public:
-    Healer(const char* name,int maxHP=100,int force=5) : Player(name,maxHP,force){
+    Healer(const string name,int maxHP=100,int force=5) : Player(name,maxHP,force){
         m_coins=10;
 
     }
