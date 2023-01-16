@@ -27,9 +27,7 @@ Player :: Player(const char* name,int maxHP,int force){
     this->m_coins=0;
 }
 
-void Player::printInfo() const{
-    printPlayerInfo(m_name,m_level,m_force,m_HP,m_coins);
-}
+
 
 void Player::levelUp(){
     if(m_level<10){
@@ -40,9 +38,8 @@ int Player::getLevel() const{
     return m_level;
 }
 
-Player::~Player(){
-    delete [] m_name;
-}
+Player::~Player(){}
+
 void Player::buff(int addedForce){
     if(addedForce>=0)
     {
@@ -51,10 +48,8 @@ void Player::buff(int addedForce){
 }
 
 Player :: Player (const Player& other)
-{
-    int length = strlen(other.m_name);
-    m_name = new char[length+1];
-    strcpy(this->m_name,other.m_name);
+{    
+    this->m_name=other.m_name;
     m_level = other.m_level ;
     m_force = other.m_force ;
     m_maxHP = other.m_maxHP ;
@@ -67,10 +62,7 @@ Player& Player::operator=(const Player& other) {
     {
         return *this;
     }
-    delete [] m_name;
-    int length = strlen(other.m_name);
-    m_name = new char[length+1];
-    strcpy(m_name,other.m_name);
+    m_name=other.m_name;
     m_level = other.m_level ;
     m_force = other.m_force ;
     m_maxHP = other.m_maxHP ;
@@ -142,5 +134,8 @@ int Player::getAttackStrength() const{
     return (m_level+m_force);
 }
 
-
+std::ostream& operator<<(std::ostream& os,const Player& player){
+    player.printInfo(os);
+    return os;
+}
 
