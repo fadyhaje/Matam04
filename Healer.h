@@ -17,6 +17,8 @@ public:
 
     ~Healer()=default ;
 
+        void printInfo(std::ostream& os ) const override;
+
 
 
 };
