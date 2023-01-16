@@ -18,6 +18,9 @@ public:
     void addCoins(int money) override;
 
     ~Ninja() =default;
+    
+        void printInfo(std::ostream& os ) const override;
+
 
 
 
