@@ -32,10 +32,10 @@ bool addPlayer(queue<unique_ptr<Player>>& Players,string& playerClass,string& pl
     do {
         printInsertPlayerMessage();
         cin>>tempName>>tempType;
-        ///////////////not completed
+        ///////////////????????????
         if(  isValidPlayerName(tempName))
         {
-            addPlayer(m_players, tempName, tempType);
+            addPlayer(m_players, tempType, tempName);
         }
 
     }while(player_num!=m_players.size());
