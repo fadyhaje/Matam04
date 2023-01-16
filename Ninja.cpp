@@ -13,3 +13,7 @@ Player* Ninja::clone() const
 
 }
 
+void Ninja::printInfo(std::ostream& os ) const{
+    printPlayerDetails(os,m_name,"Ninja",m_level,m_force,m_HP,m_coins);
+}
+
