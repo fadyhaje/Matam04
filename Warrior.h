@@ -7,7 +7,7 @@
 #define WARRIOR_H
 class Warrior: public Player{
 public:
-    Warrior(const char* name,int maxHP=100,int force=5) : Player(name,maxHP,force){
+    Warrior(const string name,int maxHP=100,int force=5) : Player(name,maxHP,force){
             m_coins=10;
 }
 
