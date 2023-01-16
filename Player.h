@@ -50,11 +50,6 @@ public:
      */
     Player& operator=(const Player& other);
 
-    /**
-     * @brief  print the information about the player
-     *
-     */
-    void printInfo() const;
 
     /**
      * @brief make the level up of the player
