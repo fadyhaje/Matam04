@@ -15,7 +15,6 @@ void Ninja::printInfo(std::ostream& os) const
 
 Player* Ninja::clone() const
 {
-    Ninja temp=new Ninja(*this);
-    return temp;
+    return new Ninja(*this);
 }
 
