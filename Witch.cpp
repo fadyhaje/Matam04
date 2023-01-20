@@ -3,7 +3,6 @@
 
 Witch :: Witch() :BattleCard(DEFAULT_FORCE_Witch,DEFAULT_LOOT_Witch,DEFAULT_DAMAGE_Wicth)
 {
-    
 }
 
 
@@ -32,6 +31,5 @@ void Wicth::printInfo(std::ostream& os ) const{
 
 Card* Wicth::clone() const
 { 
-    Witch temp=new Witch(*this);
-    return temp;
+    return new Witch(*this);
 }
