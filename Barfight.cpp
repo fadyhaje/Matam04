@@ -7,9 +7,6 @@ Barfight :: Barfight(): m_damage( DEFAULT_DAMAGE_BARFIGHT)
 {
 } 
 
-
-
-
 void Barfight ::applyEncounter(Player& player) const{
     const Warrior* warrior = dynamic_cast<const Warrior*>(&player);
     if (warrior!=nullptr)
