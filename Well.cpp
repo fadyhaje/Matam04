@@ -26,7 +26,6 @@ void Well::printInfo(std::ostream& os ) const
 
 Card* Well::clone() const
 { 
-    Well temp=new Well(*this);
-    return Well;  
+    return new Well(*this);
 }
 
