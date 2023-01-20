@@ -10,7 +10,8 @@ void Merchant :: applyEncounter(Player& player) const{
     printMerchantInitialMessageForInteractiveEncounter(std::cout,player.getName(),player.getCoins());
     int input;
     bool valid = false;
-    while(!valid){
+    while(!valid)
+    {
       std::string number;
       std::getline( std::cin,number );
       try{
@@ -56,13 +57,13 @@ void Merchant :: applyEncounter(Player& player) const{
     printMerchantSummary(std::cout,player.getName(),input,input*5);
 }
 
-
-Card* Merchant::clone() const { 
-  return new Merchant(*this); 
-}
-
 void Merchant::printInfo(std::ostream& os ) const{
   printCardDetails(os, "Merchant");
   printEndOfCardDetails(os);
+}
+
+Card* Merchant::clone() const
+{ 
+  return new Merchant(*this); 
 }
 
