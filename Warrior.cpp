@@ -17,6 +17,5 @@ void Warrior::printInfo(std::ostream& os ) const
 
 Player* Warrior::clone() const
 {
-    Warrior temp=new Warrior(*this);
-    return temp;
+    return new Warrior(*this);
 }
