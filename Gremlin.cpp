@@ -12,18 +12,16 @@ void Gremlin :: applyEncounter(Player& player) const {
         player.addCoins(m_loot);
         player.levelUp();
         printWinBattle(player.getName(), "Gremlin");
+        return;
     }
-    else
-    {
-        player.damage(m_damage);
-       printLossBattle(player.getName(),"Gremlin");
-    }
+    player.damage(m_damage);
+    printLossBattle(player.getName(),"Gremlin");
 }
 
 
 void Gremlin::printInfo(std::ostream& os ) const
 {
-    printCardDetails(os, "Gremlin");
+    printCardDetails(os,"Gremlin");
     printMonsterDetails(os,m_force,m_damage,m_loot);
 }
 
