@@ -1,7 +1,9 @@
 #include "Barfight.h"
-#include "../Players/Player.h"
-#include "../Players/Warrior.h"
 #include "../utilities.h"
+#include "../Players/Warrior.h"
+#include "../Players/Player.h"
+
+
 
 Barfight ::Barfight():m_damage(DEFAULT_DAMAGE_BARFIGHT)
 {
