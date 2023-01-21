@@ -38,7 +38,7 @@ static bool isvalidPlayerNum(int numOfPlayers){
  }
 
 
-static int handle_players_number(){
+static int  check_players_amount(){
 	string get_num;
 	int numOfPlayers;
 	for(int i=1;i>0;i++){
@@ -62,18 +62,18 @@ static int handle_players_number(){
 
 
 
-static bool handle_players_class(std::string playerClass,std::string name, std::unique_ptr<Player> players[],int place){
-	if(playerClass=="Ninja")
+static bool handle_players_class(string player_class,string name, std::unique_ptr<Player> players[],int index){
+	if(player_class=="Ninja")
 	{
-		players[place]=std::unique_ptr<Ninja>(new Ninja(name));
+		players[index]=std::unique_ptr<Ninja>(new Ninja(name));
 	}
-	else if(playerClass=="Healer")
+	else if(player_class=="Healer")
 	{
-		players[place]=std::unique_ptr<Healer>(new Healer(name));
+		players[index]=std::unique_ptr<Healer>(new Healer(name));
 	}
-	else if(playerClass=="Warrior")
+	else if(player_class=="Warrior")
 	{
-		players[place]=std::unique_ptr<Warrior>(new Warrior(name));
+		players[index]=std::unique_ptr<Warrior>(new Warrior(name));
 	}
 	else
 	{
@@ -162,7 +162,7 @@ Mtmchkin:: Mtmchkin(const std::string &fileName){
 	if (countNumOfCards< MIN_CARDS_NUM){
 		throw DeckFileInvalidSize();
 	}
-	m_playersNumber=handle_players_number();
+	m_playersNumber=check_players_amount();
 	handle_players_details(m_players,m_playersNumber);
 	for(int i=0;i<m_playersNumber;i++){
 		m_sorted[i]=i;
