@@ -25,6 +25,30 @@ using std::cin;
 using std:string;
 using std::ifstream;
 
+
+
+static bool check_players_class(string player_class,string name, std::unique_ptr<Player> players[],int index){
+	if(player_class=="Ninja")
+	{
+		players[index]=std::unique_ptr<Ninja>(new Ninja(name));
+	}
+	else if(player_class=="Healer")
+	{
+		players[index]=std::unique_ptr<Healer>(new Healer(name));
+	}
+	else if(player_class=="Warrior")
+	{
+		players[index]=std::unique_ptr<Warrior>(new Warrior(name));
+	}
+	else
+	{
+		printInvalidClass();
+		return false;
+	}
+	return true;
+}	
+
+
 static bool isvalidPlayerNum(int numOfPlayers){
     if(numOfPlayers<MIN_NUM_OF_PLAYERS || numOfPlayers>MAX_NUM_OF_PLAYERS)
     {
@@ -60,30 +84,6 @@ static int  check_players_amount(){
 
 
 
-
-
-static bool handle_players_class(string player_class,string name, std::unique_ptr<Player> players[],int index){
-	if(player_class=="Ninja")
-	{
-		players[index]=std::unique_ptr<Ninja>(new Ninja(name));
-	}
-	else if(player_class=="Healer")
-	{
-		players[index]=std::unique_ptr<Healer>(new Healer(name));
-	}
-	else if(player_class=="Warrior")
-	{
-		players[index]=std::unique_ptr<Warrior>(new Warrior(name));
-	}
-	else
-	{
-		printInvalidClass();
-		return false;
-	}
-	return true;
-}	
-
-
 static bool islegalchars(string& name)
 {
     for (int i = 0; i < name.size(); ++i) {
@@ -103,7 +103,7 @@ static bool isValidPlayerName(string& playerName){
      return true;
  }
 
-static void handle_players_details(std::unique_ptr<Player> players[],int players_num){
+static void check_players_everthing(std::unique_ptr<Player> players[],int players_num){
 	std::string player_Details;
 	std::string current_name;
 	std::string current_job;
@@ -118,7 +118,7 @@ static void handle_players_details(std::unique_ptr<Player> players[],int players
 				current_job=player_Details.substr(ch+1);
 				valid_name=isValidPlayerName(current_name);
 			}
-			valid_class = handle_players_class(current_job,current_name,players,i);
+			valid_class = check_players_class(current_job,current_name,players,i);
 			if(!valid_class){
 				valid_name=false;
 			}
@@ -159,31 +159,16 @@ Mtmchkin:: Mtmchkin(const std::string &fileName){
 	    }
 		countNumOfCards++;
 	}	
-	if (countNumOfCards< MIN_CARDS_NUM){
+	if (countNumOfCards<MIN_CARDS_NUM){
 		throw DeckFileInvalidSize();
 	}
 	m_playersNumber=check_players_amount();
-	handle_players_details(m_players,m_playersNumber);
+	handle_players_everthing(m_players,m_playersNumber);
 	for(int i=0;i<m_playersNumber;i++){
 		m_sorted[i]=i;
 	}
 }
 
-static int get_sorted_index(int sorted[],int number_of_players,int index)
-{
-	for(int i=0;i<numer_of_players;i++)
-	{
-		if(sorted[i]!=index)
-		{
-			continue;
-		}
-		else
-		{
-			return i;
-		}
-	}
-	return 0;
-}
 
 static void players_new_sort(std::unique_ptr<Player> players[],int sorted[],int number_of_players,int index)
 {
@@ -218,6 +203,23 @@ static void players_new_sort(std::unique_ptr<Player> players[],int sorted[],int 
 	return;
 }
 
+static int get_sorted_index(int sorted[],int number_of_players,int index)
+{
+	for(int i=0;i<numer_of_players;i++)
+	{
+		if(sorted[i]!=index)
+		{
+			continue;
+		}
+		else
+		{
+			return i;
+		}
+	}
+	return 0;
+}
+
+
 
 void Mtmchkin ::playRound()
 { 
@@ -250,6 +252,19 @@ void Mtmchkin ::playRound()
 }
 
 
+void Mtmchkin::printLeaderBoard() const
+{
+	int i=1;
+	std::unique_ptr<Player> current_player;
+	printLeaderBoardStartMessage();
+	while(i<m_playersNumber)
+	{
+		current_player=m_players[m_sorted[i-1]];
+		printPlayerLeaderBoard(i, *current_player);
+		i++;
+	}
+}
+
 bool Mtmchkin ::isGameOver() const
 {
 	int i=0;
@@ -275,18 +290,6 @@ bool Mtmchkin ::isGameOver() const
 	return true;
 }
 
-void Mtmchkin::printLeaderBoard() const
-{
-	int i=1;
-	std::unique_ptr<Player> current_player;
-	printLeaderBoardStartMessage();
-	while(i<m_playersNumber)
-	{
-		current_player=m_players[m_sorted[i-1]];
-		printPlayerLeaderBoard(i, *current_player);
-		i++;
-	}
-}
 
 int Mtmchkin ::getNumerOfRounds() const
 {
