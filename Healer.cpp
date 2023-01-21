@@ -3,13 +3,14 @@
 //
 
 #include "Healer.h"
-void Healer::heal(int addtional_HP) {
-
+void Healer::heal(int addtional_HP)
+{
     Player::heal(2*addtional_HP);
 }
 
 
-void Healer ::printInfo(std::ostream& os) const{
+void Healer ::printInfo(std::ostream& os) const
+{
     printPlayerDetails(os,m_name,"Healer",m_level,m_force,m_HP,m_coins);
 }
 
