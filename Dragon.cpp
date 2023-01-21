@@ -10,14 +10,11 @@ void Dragon :: applyEncounter(Player& player) const {
     { 
         player.addCoins(m_loot);
         player.levelUp();
-        printWinBattle(player.getName(), "Dragon");
+        printWinBattle(player.getName(),"Dragon");
+        return;
     }
-    else
-    {
-       player.damage(m_damage);
-       printLossBattle(player.getName(),"Dragon");
-
-    }
+    player.damage(m_damage);
+    printLossBattle(player.getName(),"Dragon");
 }
 
 void Dragon::printInfo(std::ostream& os) const
