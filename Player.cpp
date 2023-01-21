@@ -1,5 +1,5 @@
-#include <iostream>
 #include "Player.h"
+#include "../utilities.h"
 #include "Ninja.h"
 #include "Healer.h"
 #include "Warrior.h"
