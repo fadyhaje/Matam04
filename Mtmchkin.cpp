@@ -401,7 +401,7 @@ static void players_new_sort(std::unique_ptr<Player> players[],int sorted[],int 
 		{
 			break;
 		}
-		curren_rank=dorted[sorted_index];
+		curren_rank=sorted[sorted_index];
 	        sorted[sorted_index]=sorted[sorted_index+way];
 	        sorted[sorted+index]=curren_rank; 
 		sorted_index=get_sorted_index(sorted,number_of_players,index);
@@ -449,16 +449,19 @@ bool Mtmchkin ::isGameOver() const
 	bool flag=false;
 	while(i<m_playersNumber)
 	{
-		if((m_players[i]->isKnockedOut()==false) &&(m_players[i]->getLevel()<MAX_LEVEL)){
+		if((m_players[i]->isKnockedOut()==false) &&(m_players[i]->getLevel()<MAX_LEVEL))
+		{
 			flag=true;
 			break;
 		}
-		else{
+		else
+		{
 			i++;
 			continue;
 		}
 	}
-	if(flag==true){
+	if(flag==true)
+	{
 		return false;
 	}
 	printGameEndMessage();
@@ -478,26 +481,9 @@ void Mtmchkin::printLeaderBoard() const
 	}
 }
 
-/////////////////////////////////////////////
 int Mtmchkin ::getNumerOfRounds() const
 {
 	return m_roundsNumber;
 }
 
-static bool islegalchars(string& name)
-{
-    for (int i = 0; i < name.size(); ++i) {
-        if(!(name[i]<='z'||name[i]>='a')||!(name[i]<='Z'&&name[i]>='A')&&name[i]==' ')
-            return false;
-    }
-    return true;
-}
-//handle_players_name
-static bool isValidPlayerName(string& playerName){
-     if(playerName.size()>MAX_NUM_OF_LETTERS|| !islegalchars(playerName))
-     {
-         printInvalidName();
-         return false;
-     }
-     return true;
- }
+
