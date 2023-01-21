@@ -29,6 +29,25 @@ void Player::buff(int addedForce){
     }
 }
 
+std::ostream& operator<<(std::ostream& os,const Player& player){
+    
+    const Ninja* temp_ninja=dynamic_cast<const Ninja*>(&player);
+    const Healer* temp_Healer = dynamic_cast<const Healer*>(&player);
+    const Warrior* temp_warrior = dynamic_cast<const Warrior*>(&player);
+    if(temp_ninja != nullptr)
+    {
+      printPlayerDetails(os,player.m_name,"Ninja",player.m_level,player.m_force,player.m_HP,player.m_coins);
+    }
+    else if(temp_warrior != nullptr)
+    {
+      printPlayerDetails(os,player.m_name,"Warrior",player.m_level,player.m_force,player.m_HP,player.m_coins);
+    }
+    else if(temp_healer != nullptr){
+      printPlayerDetails(os,player.m_name,"Healer",player.m_level,player.m_force,player.m_HP,player.m_coins);
+    }
+    return os;    
+}
+
 Player :: Player (const Player& other)
 {    
     this->m_name=other.m_name;
@@ -115,9 +134,3 @@ bool Player::pay(int money){
 int Player::getAttackStrength() const{
     return (m_level+m_force);
 }
-
-std::ostream& operator<<(std::ostream& os,const Player& player){
-    player.printInfo(os);
-    return os;
-}
-
