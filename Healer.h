@@ -1,25 +1,25 @@
 //
 // Created by USER on 11/01/2023.
 //
-#include "Player.h"
+
 #ifndef HEALER_H
 #define HEALER_H
+
+#include <stdbool.h>
+#include <string>
+#include "../utilities.h"
+#include "Player.h"
+
+using std:string;
 class Healer: public Player{
 public:
-    Healer(const string name,int maxHP=100,int force=5) : Player(name,maxHP,force){
-        m_coins=10;
-
-    }
+    Healer(string name) : Player(name){}
 
     virtual Player* clone() const;
 
     void heal(int addedHP) override;
 
     ~Healer()=default ;
-
-        void printInfo(std::ostream& os ) const override;
-
-
 
 };
 
