@@ -6,10 +6,10 @@
 #include <stdbool.h>
 #include "../utilities.h"
 
-#define DEFAULT_HP_MERCHANT 1
-#define DEFAULT_FORCE_MERCHANT 1
-#define HP_PRICE_MERCHANT 5
-#define FORCE_PRICE_MERCHANT 10
+#define HP_PRICE_FOR_MERCHANT 5
+#define FORCE_PRICE_FOR_MERCHANT 10
+#define DEFAULT_HP_FOR_MERCHANT 1
+#define DEFAULT_FORCE_FOR_MERCHANT 1
 
 class Merchant : public Card{
     public:
