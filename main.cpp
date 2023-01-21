@@ -15,11 +15,11 @@ int main()
            game.printLeaderBoard();
         }
     }
-    catch(const DeckFileFormatError& e){
+    catch(const DeckFileNotFound& e){
         cout << e.what() <<endl;
         return 1;
     }
-    catch(const DeckFileNotFound& e){
+    catch(const DeckFileFormatError& e){
         cout << e.what() <<endl;
         return 1;
     }
