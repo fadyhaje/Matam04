@@ -12,14 +12,11 @@ void Wictch :: applyEncounter(Player& player) const{
         player.addCoins(m_loot);
         player.levelUp();
         printWinBattle(player.getName(),"Wicth");
+        return;
     }
-    else
-    {
-       player.damage(m_damage);
-       player.damageForce();
-       printLossBattle(player.getName(),"Wicth");
-        
-    }
+    player.damage(m_damage);
+    player.damageForce();
+    printLossBattle(player.getName(),"Wicth");
 }
 
 void Wicth::printInfo(std::ostream& os ) const{
