@@ -11,11 +11,10 @@ void Well :: applyEncounter(Player& player)const
     const Ninja* ninja = dynamic_cast<const Ninja*>(&player);
     if(ninja !=nullptr){
         printWellMessage(true);
+        return;
     }
-    else{
-        player.damage(m_damage);
-        printWellMessage(false);
-    }
+    player.damage(m_damage);
+    printWellMessage(false);
 }
 
 void Well::printInfo(std::ostream& os ) const
