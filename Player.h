@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <string>
 #include "utilities.h"
+#include <math.h>
+#include <iostream> 
 #define DEFAULT_MAX_HP 100
 #define DEFAULT_FORCE 5
 #define DEFAULT_MAX_HP 10
