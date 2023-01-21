@@ -78,9 +78,9 @@ public:
 private:
     int m_playersNumber;
     int m_roundsNumber;
-       std::queue<std::unique_ptr<Card>> m_cards;
-       std::unique_ptr<Player> m_players[MAX_NUM_OF_PLAYERS];
-       int m_sorted[MAX_NUM_OF_PLAYERS];
+    std::queue<std::unique_ptr<Card>> m_cards;
+    std::unique_ptr<Player> m_players[MAX_NUM_OF_PLAYERS];
+    int m_sorted[MAX_NUM_OF_PLAYERS];
 };
 
 
