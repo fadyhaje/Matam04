@@ -21,6 +21,12 @@ static void checker_1(Player& player){
   }
 }
 
+void Merchant ::printInfo(std::ostream& os) const
+{
+  printCardDetails(os,"Merchant");
+  printEndOfCardDetails(os);
+}
+
 static void checker_2(Player& player){
   if(player.getCoins()<FORCE_PRICE_FOR_MERCHANT)
   {
@@ -35,10 +41,9 @@ static void checker_2(Player& player){
   }
 }
 
-void Merchant ::printInfo(std::ostream& os) const
-{
-  printCardDetails(os,"Merchant");
-  printEndOfCardDetails(os);
+Card* Merchant ::clone() const
+{ 
+  return new Merchant(*this); 
 }
 
 void Merchant ::applyEncounter(Player& player) const{
@@ -78,8 +83,4 @@ void Merchant ::applyEncounter(Player& player) const{
   printMerchantSummary(std::cout,player.getName(),input,input*5);
 }
 
-Card* Merchant ::clone() const
-{ 
-  return new Merchant(*this); 
-}
 
