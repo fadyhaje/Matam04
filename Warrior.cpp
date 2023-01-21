@@ -7,13 +7,9 @@
 
 int Warrior::getAttackStrength() const
 {
-    return (2*m_force+m_level);
+    return (getLevel()+2*m_force);
 }
 
-void Warrior::printInfo(std::ostream& os ) const
-{
-    printPlayerDetails(os,m_name,"Warrior",m_level,m_force,m_HP,m_coins);
-}
 
 Player* Warrior::clone() const
 {
