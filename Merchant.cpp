@@ -19,7 +19,7 @@ void Merchant ::applyEncounter(Player& player) const{
     int temp_input;
     while(available==false)
     {
-      std::getline( std::cin,number );
+      std::getline( std::cin,number);
       std::string number;
       try
       {
