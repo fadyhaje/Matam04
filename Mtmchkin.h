@@ -1,19 +1,31 @@
 #ifndef MTMCHKIN_H_
 #define MTMCHKIN_H_
+
+#include "Players/Player.h"
+#include "Cards/Card.h"
 #include <iostream>
 #include <cstring>
 #include <sstream>
 #include <functional>
 #include <map>
-#include "Card.h"
 #include <memory>
 #include <queue>
+#include <string>
+#include <stdbool.h>
+#include <assert.h>
+#include <fstream>
+#include <string>
+
 using std::unique_ptr;
 using std::cout;
 using std::endl;
 using std::string;
 using std::ifstream;
 using std::ostream;
+
+#define MAX_NUM_OF_PLAYERS 6
+#define MIN_NUM_OF_PLAYERS 2
+
 class Mtmchkin{
 
 public:
@@ -60,11 +72,12 @@ public:
     */
     int getNumberOfRounds() const;
 
-    ~Mtmchkin()=delete;
     Mtmchkin(const Mtmchkin& other)=delete;
     Mtmchkin& operator=(const Mtmchkin& other)=delete;
 
 private:
+    int m_playersNumber;
+    int m_roundsNumber;
     queue<unique_ptr<Card>> m_card_Deck;
     queue<unique_ptr<Player>> m_players;
 };
