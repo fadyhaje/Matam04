@@ -1,10 +1,12 @@
 #include "Merchant.h"
 
 
-Merchant :: Merchant (){
-  m_hp = DEFAULT_HP_FOR_MERCHANT;
+Merchant ::Merchant ()
+{
   m_force = DEFAULT_FORCE_FOR_MERCHANT;
+  m_hp = DEFAULT_HP_FOR_MERCHANT;
 }
+
 void Merchant ::printInfo(std::ostream& os) const
 {
   printCardDetails(os,"Merchant");
@@ -39,7 +41,7 @@ void Merchant ::applyEncounter(Player& player) const{
     }
   switch(temp_input){
     case 2:
-        if(player.getCoins()<FORCE_PRICE_MERCHANT)
+        if(player.getCoins()<FORCE_PRICE_FOR_MERCHANT)
         {
           printMerchantInsufficientCoins(std::cout);
           printMerchantSummary(std::cout,player.getName(),2,0);
@@ -52,7 +54,7 @@ void Merchant ::applyEncounter(Player& player) const{
         }
         break;
     case 1:
-       if(player.getCoins()<HP_PRICE_MERCHANT)
+       if(player.getCoins()<HP_PRICE_FOR_MERCHANT)
        {
          printMerchantInsufficientCoins(std::cout);
          printMerchantSummary(std::cout,player.getName(),1,0);
