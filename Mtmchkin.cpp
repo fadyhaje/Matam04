@@ -59,25 +59,7 @@ static int handle_players_number(){
 }
 
 
-/*
-static bool handle_players_name(std::string *playerName){	
-	if(playerName->length()>MAX_NUM_OF_LETTERS) {
-		printInvalidName();
-		return false;
-	}
-	for(std::size_t i=0;i<playerName->length();i++){
-		char letter=playerName->at(i);
-		if ((letter >= 'A' && letter <= 'Z' ) || ( letter >= 'a' && letter <= 'z' ))
-		{
-			continue; 
-		}  
-		else{
-			printInvalidName();  
-			return false;
-		}
-	}
-	return true;
-}*/
+
 
 
 static bool handle_players_class(std::string playerClass,std::string name, std::unique_ptr<Player> players[],int place){
@@ -110,7 +92,8 @@ static bool islegalchars(string& name)
     }
     return true;
 }
-//handle_players_name
+
+
 static bool isValidPlayerName(string& playerName){
      if(playerName.size()>MAX_NUM_OF_LETTERS|| !islegalchars(playerName))
      {
@@ -119,7 +102,6 @@ static bool isValidPlayerName(string& playerName){
      }
      return true;
  }
-
 
 static void handle_players_details(std::unique_ptr<Player> players[],int players_num){
 	std::string player_Details;
@@ -186,19 +168,6 @@ Mtmchkin:: Mtmchkin(const std::string &fileName){
 		m_sorted[i]=i;
 	}
 }
-   
-/*static bool is_playing(const Player& player)
-{
-	return ((player.isKnockedOut()==false) &&(player.getLevel()<MAX_LEVEL));
-}
-
-static void swap(int ranking[],int src,int dest)
-{
-	int curren_rank=ranking[src];
-	ranking[src]=ranking[dest];
-	ranking[dest]=curren_rank; 
-}*/
-
 
 static int get_sorted_index(int sorted[],int number_of_players,int index)
 {
@@ -269,7 +238,7 @@ void Mtmchkin ::playRound()
 			firstCard->applyEncounter(*m_players[i]);
 			m_cards.push(first_card); 
 			m_cards.pop();
-			players_new_sort(m_players,m_ranking,m_playersNumber,i);
+			players_new_sort(m_players,m_sorted,m_playersNumber,i);
 			i++;
 		}
 	}
