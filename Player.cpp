@@ -1,31 +1,15 @@
 #include <iostream>
 #include "Player.h"
-#include <cstring>
+using std::string; 
 
-Player :: Player(const string name,int maxHP,int force){
+Player :: Player(const string name){
     this->m_name = name;
     this->m_level=1;
-    if(force>0){
-        this->m_force=force;
-    }
-    else
-    {
-        this->m_force=DEFAULT_FORCE;
-    }
-    if(maxHP<=0)
-    {
-        this->m_maxHP=DEFAULT_MAX_HP;
-        this->m_HP=DEFAULT_MAX_HP;
-    }
-    else
-    {
-        this->m_maxHP=maxHP;
-        this->m_HP=maxHP;
-    }
-    this->m_coins=0;
+    this->m_force=DEFAULT_FORCE;
+    this->m_maxHP=DEFAULT_MAX_HP;
+    this->m_HP=DEFAULT_MAX_HP;
+    this->m_coins=DEFAULT_COINS;
 }
-
-
 
 void Player::levelUp(){
     if(m_level<10){
