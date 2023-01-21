@@ -139,6 +139,23 @@ bool isValidPlayerName(string& playerName){
  }
 
 
+#include "Mtmchkin.h"
+#include "utilities.h"
+#include <map>
+
+#include "Players/Wizard.h"
+#include "Players/Fighter.h"
+#include "Players/Rogue.h"
+#include "Cards/Merchant.h"
+#include "Cards/Treasure.h"
+#include "Cards/Pitfall.h"
+#include "Cards/Barfight.h"
+#include "Cards/Dragon.h"
+#include "Cards/Fairy.h"
+#include "Cards/Goblin.h"
+#include "Cards/Vampire.h"
+#include "Exception.h" 
+
 #define MAX_LETTERS_NUMBER 15
 #define MAX_LEVEL 10
 #define MOVE_RIGHT 1
