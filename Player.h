@@ -27,7 +27,7 @@ public:
      * @param maxHP - the max hp of the player (default = 100)
      * @param force - the force of the player(default = 5)
      */
-    Player(const string name,int maxHP=100,int force=5);
+    Player(const string name);
 
     /**
      * @brief Copy constructor of the Player
