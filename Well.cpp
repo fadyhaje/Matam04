@@ -1,6 +1,6 @@
 #include "Well.h"
 
-Well :: Well()
+Well ::Well()
 {
     m_damage = DEFAULT_DAMAGE_Well;  
 }
