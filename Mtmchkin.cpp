@@ -1,149 +1,5 @@
-using std::unique_ptr;
-using std::cout;
-using std::endl;
-using std::string;
-using std::ifstream;
-using std::ostream;
-
-
-void isvalidsize(int size);///if the size of cards less than 5 throw exception
-bool isvalidPlayerNum(int numOfPlayer);///if the number of players between 2 and 6
-bool islegalchars(string& name);///if the name consisted of small and capital chars
-bool isValidPlayerName(string& playerName);///if the name less than 15 chars and has legal chars
-void createCardDeck(const std::string &fileName,queue<unique_ptr<Card>>& cardDeck);///add the card to the deck cards
-bool addPlayer(queue<unique_ptr<Player>>& Players,string& playerClass,string& playerName);///add a new player &&checks if the class name is legal
-
-
- Mtmchkin:: Mtmchkin(const std::string &fileName)
-{
-     int  player_num;
-     string tempName,tempType;
-     bool flag;
-    createCardDeck(fileName,m_card_Deck);
-    isvalidsize(m_card_Deck.size());
-
-    printStartGameMessage();
-    do{
-        printEnterTeamSizeMessage();
-        cin>>player_num;
-        flag= isvalidPlayerNum(player_num);
-    }while(!flag);
-
-    do {
-        printInsertPlayerMessage();
-        cin>>tempName>>tempType;
-        ///////////////????????????
-        if(  isValidPlayerName(tempName))
-        {
-            addPlayer(m_players, tempType, tempName);
-        }
-
-    }while(player_num!=m_players.size());
-
-}
-void isvalidsize(int size)
-{
-     if(size<5)
-     {
-         throw DeckFileInvalidSize();
-     }
-}
-void createCardDeck(const std::string &fileName,queue<unique_ptr<Card>>& cardDeck)
-{
-    string cardName;
-     ifstream source(fileName);
-     if(!source.is_open())
-    {
-        throw DeckFileNotFound();
-    }
-    while(!source.eof())
-    {
-        if(!getline(source,cardName)) {
-            throw DeckFileFormatError(cardDeck.size());
-        }
-
-    else {
-
-            if (cardName == "Gremlin") {
-                cardDeck.push(unique_ptr<Card>(new Gremlin()));
-            } else if (cardName == "Witch") {
-                cardDeck.push(unique_ptr<Card>(new Witch()));
-            } else if (cardName == "Dragon") {
-                cardDeck.push(unique_ptr<Card>(new Dragon()));
-            } else if (cardName == "Merchant") {
-                cardDeck.push(unique_ptr<Card>(new Merchanr()));
-            } else if (cardName == "Treasure") {
-                cardDeck.push(unique_ptr<Card>(new Treasure()));
-            } else if (cardName == "Well") {
-                cardDeck.push(unique_ptr<Card>(new Well()));
-            } else if (cardName == "Barfight") {
-                cardDeck.push(unique_ptr<Card>(new Barfight()));
-            } else if (cardName == "Mana") {
-                cardDeck.push(unique_ptr<Card>(new Mana()));
-            }
-        }
-}
-}
-
-bool isvalidPlayerNum(int numOfPlayer){
-    if(numOfPlayer<2||numOfPlayer>6)
-    {
-        printInvalidTeamSize();
-        return false;
-    }
-    else
-    {
-        return true;
-    }
- }
-
-bool addPlayer(queue<unique_ptr<Player>>& Players,string& playerClass,string& playerName){
-     if(playerClass=="Ninja")
-     {
-         Players.push(unique_ptr<Player> (new Ninja(playerName)));
-         return true;
-     }
-     else
-         if(playerClass=="Healer")
-    {
-        Players.push(unique_ptr<Player> (new Healer(playerName)));
-        return true;
-    }
-         else
-             if(playerClass=="Warrior")
-         {
-             Players.push(unique_ptr<Player> (new Warrior(playerName)));
-             return true;
-         }
-     else {
-         printInvalidClass();
-         return false;
-     }
- }
-
-
-
-bool islegalchars(string& name)
-{
-    for (int i = 0; i < name.size(); ++i) {
-        if(!(name[i]<='z'||name[i]>='a')||!(name[i]<='Z'&&name[i]>='A')&&name[i]==' ')
-            return false;
-    }
-    return true;
-}
-//handle_players_name
-bool isValidPlayerName(string& playerName){
-     if(playerName.size()>15|| !islegalchars(playerName))
-     {
-         printInvalidName();
-         return false;
-     }
-     return true;
- }
-
-
 #include "Mtmchkin.h"
-#include <map>
+
 #include "utilities.h"
 #include "Players/Ninja.h"
 #include "Players/Healer.h"
@@ -166,29 +22,37 @@ bool isValidPlayerName(string& playerName){
 
 using std::find;
 using std::cin;
+using std:string;
 using std::ifstream;
 
+static bool isvalidPlayerNum(int numOfPlayers){
+    if(numOfPlayers<MIN_NUM_OF_PLAYERS || numOfPlayers>MAX_NUM_OF_PLAYERS)
+    {
+        printInvalidTeamSize();
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+ }
+
+
 static int handle_players_number(){
-	int players_number;
-	printEnterTeamSizeMessage();
-	bool valid=false;
-	while(!valid){
-		std::string number;
-		std::getline( std::cin,number );
+	string get_num;
+	int numOfPlayers;
+	for(int i=1;i>0;i++){
+		printEnterTeamSizeMessage();
+		cin >> get_num;
 		try{
-			players_number = std::stoi(number);
+			numOfPlayers=std::stoi(get_num);
 		}
 		catch(...){
 			printInvalidTeamSize();
-			printEnterTeamSizeMessage();
 			continue;
 		}
-		if((players_number >= MIN_NUM_OF_PLAYERS) && (players_number <= MAX_NUM_OF_PLAYERS)){
-			return players_number;
-		}
-		else{
-			printInvalidTeamSize();
-			printEnterTeamSizeMessage();
+		if(isvalidPlayerNum(numOfPlayers)){
+			return numOfPlayers;
 		}
 	}
 	return 0;
@@ -217,30 +81,26 @@ static bool handle_players_name(std::string *playerName){
 
 
 static bool handle_players_class(std::string playerClass,std::string name, std::unique_ptr<Player> players[],int place){
-	std::map<std::string, int> play;
-	play["Ninja"] = 0;
-	play["Healer"] = 1;
-	play["Warrior"] = 2;
-	if(!play.count(playerClass)){
+	if(playerClass=="Ninja")
+	{
+		players[place]=std::unique_ptr<Ninja>(new Ninja(name));
+	}
+	else if(playerClass=="Healer")
+	{
+		players[place]=std::unique_ptr<Healer>(new Healer(name));
+	}
+	else if(playerClass=="Warrior")
+	{
+		players[place]=std::unique_ptr<Warrior>(new Warrior(name));
+	}
+	else
+	{
 		printInvalidClass();
 		return false;
 	}
-	switch (play[playerClass]){
-		case 0:
-			players[place]=std::unique_ptr<Rogue>(new Ninja(name));
-			break;
-		case 1:
-			players[place]=std::unique_ptr<Wizard>(new Healer(name));
-			break;
-		case 2:
-			players[place]=std::unique_ptr<Fighter>(new Warrior(name));
-			break;
-		default:
-			printInvalidClass();
-			return false;
-	}
 	return true;
-}
+}	
+
 
 static bool islegalchars(string& name)
 {
@@ -261,7 +121,7 @@ static bool isValidPlayerName(string& playerName){
  }
 
 
-static void handle_players_details(std::unique_ptr<Player> players[],int players_num ){
+static void handle_players_details(std::unique_ptr<Player> players[],int players_num){
 	std::string player_Details;
 	std::string current_name;
 	std::string current_job;
@@ -289,63 +149,41 @@ static void handle_players_details(std::unique_ptr<Player> players[],int players
 
 Mtmchkin:: Mtmchkin(const std::string &fileName){
 	printStartGameMessage();
-	m_roundsNumber=0;
+	m_roundsNumber=0,countNumOfCards=0
 	ifstream source(fileName);
 	if (!source) {
 		throw DeckFileNotFound();
 	}
-	std::map<std::string, int> cards;
-	cards["Mana"] = 0;
-	cards["Dragon"] = 1;
-	cards["Witch"] = 2;
-	cards["Gremlin"] = 3;
-	cards["Well"] = 4;
-	cards["Barfight"] = 5;
-	cards["Treasure"] = 6;
-	cards["Merchant"] = 7;
-	std::string line;
-	int countNumOfCards=0;
-	while(getline(source,line)){
+	std::string cardName;
+	while(getline(source,cardName)){	
+            if (cardName == "Gremlin") {
+                m_cards.push(std::unique_ptr<Goblin>(new Gremlin()));
+            } else if (cardName == "Witch") {
+                m_cards.push(std::unique_ptr<Witch>(new Witch()));
+            } else if (cardName == "Dragon") {
+                m_cards.push(std::unique_ptr<Dragon>(new Dragon()));
+            } else if (cardName == "Merchant") {
+                m_cards.push(std::unique_ptr<Merchant>(new Merchant()));
+            } else if (cardName == "Treasure") {
+                m_cards.push(std::unique_ptr<Treasure>(new Treasure()));
+            } else if (cardName == "Well") {
+                m_cards.push(std::unique_ptr<Well>(new Well()));
+            } else if (cardName == "Barfight") {
+                m_cards.push(std::unique_ptr<Barfight>(new Barfight()));
+            } else if (cardName == "Mana") {
+                m_cards.push(std::unique_ptr<Mana>(new Mana()));
+            }else{
+		throw DeckFileFormatError(countNumOfCards);
+	    }
 		countNumOfCards++;
-		if(!cards.count(line)){
-			throw DeckFileFormatError(countNumOfCards);
-		}
-		switch(cards[line]){
-			case 0:
-				m_cards.push(std::unique_ptr<Fairy>(new Mana()));
-				break; 
-			case 1:   
-				m_cards.push(std::unique_ptr<Dragon>(new Dragon()));
-				break; 
-			case 2:
-				m_cards.push(std::unique_ptr<Vampire>(new Witch()));
-				break; 
-			case 3:
-				m_cards.push(std::unique_ptr<Goblin>(new Gremlin()));
-				break; 
-			case 4:
-				m_cards.push(std::unique_ptr<Pitfall>(new Well()));
-				break; 
-			case 5:
-				m_cards.push(std::unique_ptr<Barfight>(new Barfight()));
-				break; 
-			case 6:
-				m_cards.push(std::unique_ptr<Treasure>(new Treasure()));
-				break; 
-			case 7:
-				m_cards.push(std::unique_ptr<Merchant>(new Merchant()));
-				break; 
-			default:
-				throw DeckFileFormatError(countNumOfCards);
-		}
-	}
+	}	
 	if (countNumOfCards< MIN_CARDS_NUM){
 		throw DeckFileInvalidSize();
 	}
 	m_playersNumber=handle_players_number();
 	handle_players_details(m_players,m_playersNumber);
 	for(int i=0;i<m_playersNumber;i++){
-		m_ranking[i]=i;
+		m_sorted[i]=i;
 	}
 }
    
