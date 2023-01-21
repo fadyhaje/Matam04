@@ -1,5 +1,9 @@
 #include <iostream>
 #include "Player.h"
+#include "Ninja.h"
+#include "Healer.h"
+#include "Warrior.h"
+
 using std::string; 
 
 Player :: Player(const string name){
