@@ -1,24 +1,26 @@
 //
 // Created by USER on 11/01/2023.
 //
-#include "Player.h"
-
 #ifndef WARRIOR_H
 #define WARRIOR_H
+
+#include "Player.h"
+#include <stdbool.h>
+#include "../utilities.h"
+#include <string>
+#include "../Players/Player.h"
+
+using std:string;
+
 class Warrior: public Player{
 public:
-    Warrior(const string name,int maxHP=100,int force=5) : Player(name,maxHP,force){
-            m_coins=10;
-}
+    Warrior(string name) : Player(name){}
 
     virtual Player* clone() const;
 
     int getAttackStrength() const override;
 
     ~Warrior()=default ;
-
-     void printInfo(std::ostream& os ) const override;
-
 
 };
 #endif //UNTITLED2_WARRIOR_H
