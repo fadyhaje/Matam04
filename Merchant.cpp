@@ -7,6 +7,34 @@ Merchant ::Merchant ()
   m_hp = DEFAULT_HP_FOR_MERCHANT;
 }
 
+static void checker_1(Player& player){
+  if(player.getCoins()<HP_PRICE_FOR_MERCHANT)
+  {
+    printMerchantInsufficientCoins(std::cout);
+    printMerchantSummary(std::cout,player.getName(),1,0);
+    return;
+  }
+  else
+  {
+    player.pay(HP_PRICE_MERCHANT);
+    player.heal(m_hp);
+  }
+}
+
+static void checker_2(Player& player){
+  if(player.getCoins()<FORCE_PRICE_FOR_MERCHANT)
+  {
+    printMerchantInsufficientCoins(std::cout);
+    printMerchantSummary(std::cout,player.getName(),2,0);
+    return;
+  }
+  else
+  {
+    player.pay(FORCE_PRICE_MERCHANT);
+    player.buff(m_force); 
+  }
+}
+
 void Merchant ::printInfo(std::ostream& os) const
 {
   printCardDetails(os,"Merchant");
@@ -41,30 +69,10 @@ void Merchant ::applyEncounter(Player& player) const{
     }
   switch(temp_input){
     case 2:
-        if(player.getCoins()<FORCE_PRICE_FOR_MERCHANT)
-        {
-          printMerchantInsufficientCoins(std::cout);
-          printMerchantSummary(std::cout,player.getName(),2,0);
-          return;
-        }
-        else
-        {
-          player.pay(FORCE_PRICE_MERCHANT);
-          player.buff(m_force); 
-        }
+      checker_2(player);
         break;
     case 1:
-       if(player.getCoins()<HP_PRICE_FOR_MERCHANT)
-       {
-         printMerchantInsufficientCoins(std::cout);
-         printMerchantSummary(std::cout,player.getName(),1,0);
-         return;
-      }
-      else
-      {
-        player.pay(HP_PRICE_MERCHANT);
-        player.heal(m_hp);
-      }
+      checker_1(player);
       break;
   }
   printMerchantSummary(std::cout,player.getName(),input,input*5);
