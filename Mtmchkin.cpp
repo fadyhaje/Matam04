@@ -86,7 +86,7 @@ static int  check_players_amount(){
 static bool islegalchars(string& name)
 {
     for (int i = 0; i < name.size(); ++i) {
-        if(!(name[i]<='z'||name[i]>='a')||!(name[i]<='Z'&&name[i]>='A')&&name[i]==' ')
+        if(!(name[i]<='z'&& name[i]>='a') && !(name[i]<='Z'&& name[i]>='A'))
             return false;
     }
     return true;
