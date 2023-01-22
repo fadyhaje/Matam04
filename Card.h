@@ -18,9 +18,8 @@ Card() = default ;
 *
 *
 */
-virtual ~Card() ;
-
-
+virtual ~Card(){}
+  
 virtual void applyEncounter(Player& player) const=0;
 
 
