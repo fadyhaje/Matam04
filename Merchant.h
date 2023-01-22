@@ -46,6 +46,8 @@ class Merchant : public Card{
     void printInfo(std::ostream& os ) const override;
 
     private:
+    void checker_1(Player& player) const;
+    void checker_2(Player& player) const;
     int m_hp;
     int m_force;
 };
