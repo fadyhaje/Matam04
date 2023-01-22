@@ -144,3 +144,13 @@ bool Player::pay(int money){
 int Player::getAttackStrength() const{
     return (m_level+m_force);
 }
+
+void Player ::force_damage(){
+    if(m_force<=0){
+        m_force=0;
+    }
+    else{
+        m_force--;
+    }
+}
+
