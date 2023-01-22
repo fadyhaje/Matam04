@@ -237,7 +237,7 @@ void Mtmchkin ::playRound()
             std::unique_ptr<Card> firstCard=std::move( m_cards.front());
             printTurnStartMessage(std::string(m_players[i]->getName()));
             firstCard->applyEncounter(*m_players[i]);
-            m_cards.push(firstCard);
+            m_cards.push(std::move(firstCard));
             m_cards.pop();
             players_new_sort(m_players,m_sorted,m_playersNumber,i);
             i++;
@@ -254,6 +254,7 @@ void Mtmchkin ::playRound()
 void Mtmchkin::printLeaderBoard() const
 {
     int i=1;
+
     printLeaderBoardStartMessage();
     while(i<m_playersNumber)
     {
