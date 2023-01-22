@@ -120,9 +120,14 @@ public:
 
     virtual Player* clone() const=0;
     
-    virtual void printInfo(std::ostream& os ) const=0;
+    void printInfo(std::ostream& os ) const;
 
     friend std::ostream& operator<<(std::ostream& os,const Player& player);
+    
+     int getCoins() const;
+
+    string getName() const;
+
 
 };
 
