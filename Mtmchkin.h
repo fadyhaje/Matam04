@@ -74,6 +74,7 @@ public:
 
     Mtmchkin(const Mtmchkin& other)=delete;
     Mtmchkin& operator=(const Mtmchkin& other)=delete;
+   
 
 private:
     int m_playersNumber;
@@ -81,8 +82,9 @@ private:
     std::queue<std::unique_ptr<Card>> m_cards;
     std::unique_ptr<Player> m_players[MAX_NUM_OF_PLAYERS];
     int m_sorted[MAX_NUM_OF_PLAYERS];
-};
-
+    checker_1(Player& player);
+    checker_2(Player& player);
+}
 
 
 #endif /* MTMCHKIN_H_ */
