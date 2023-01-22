@@ -7,7 +7,7 @@
 
 #define DEFAULT_FORCE_Witch 11
 #define DEFAULT_LOOT_Witch 2
-#define DEFAULT_DAMAGE_WItch 10
+#define DEFAULT_DAMAGE_Witch 10
 
 class Witch : public BattleCard{ 
     public:
