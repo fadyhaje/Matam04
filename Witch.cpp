@@ -1,32 +1,32 @@
 #include "Witch.h"
 
 
-Witch :: Witch() :BattleCard(DEFAULT_FORCE_Witch,DEFAULT_LOOT_Witch,DEFAULT_DAMAGE_Wicth)
+Witch :: Witch() :BattleCard(DEFAULT_FORCE_Witch,DEFAULT_LOOT_Witch,DEFAULT_DAMAGE_Witch)
 {
 }
 
 
-void Wictch :: applyEncounter(Player& player) const{
+void Witch :: applyEncounter(Player& player) const{
     if(m_force <= player.getAttackStrength())
     {
         player.addCoins(m_loot);
         player.levelUp();
-        printWinBattle(player.getName(),"Wicth");
+        printWinBattle(player.getName(),"Witch");
         return;
     }
     player.damage(m_damage);
     player.damageForce();
-    printLossBattle(player.getName(),"Wicth");
+    printLossBattle(player.getName(),"Witch");
 }
 
-void Wicth::printInfo(std::ostream& os ) const{
-    printCardDetails(os,"Wicth");
+void Witch::printInfo(std::ostream& os ) const{
+    printCardDetails(os,"Witch");
     printMonsterDetails(os,m_force,m_damage,m_loot);
     printEndOfCardDetails(os);
 
 }
 
-Card* Wicth::clone() const
-{ 
+Card* Witch::clone() const
+{
     return new Witch(*this);
 }
