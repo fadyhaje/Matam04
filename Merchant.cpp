@@ -80,7 +80,7 @@ void Merchant ::applyEncounter(Player& player) const{
       checker_1(player);
       break;
   }
-  printMerchantSummary(std::cout,player.getName(),input,input*5);
+  printMerchantSummary(std::cout,player.getName(),input,temp_input*5);
 }
 
 
