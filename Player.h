@@ -127,7 +127,8 @@ public:
      int getCoins() const;
 
     string getName() const;
-
+    
+    void force_damage();
 
 };
 
