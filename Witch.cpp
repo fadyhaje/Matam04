@@ -15,7 +15,7 @@ void Witch :: applyEncounter(Player& player) const{
         return;
     }
     player.damage(m_damage);
-    player.damageForce();
+    player.force_damage();
     printLossBattle(player.getName(),"Witch");
 }
 
