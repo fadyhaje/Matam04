@@ -188,13 +188,13 @@ static void players_new_sort(std::unique_ptr<Player> players[],int sorted[],int 
     int temp_index=sorted_index+way,current_rank;
     bool flag=temp_index<number_of_players && temp_index>=0;
     while(flag){
-        if(!((players[sorted[i+way]]->isKnockedOut()==false) && (players[sorted[i+way]]->getLevel()<MAX_LEVEL)))
+        if(!((players[sorted[sorted_index]]->isKnockedOut()==false) && (players[sorted[sorted_index]]->getLevel()<MAX_LEVEL)))
         {
             break;
         }
         current_rank=sorted[sorted_index];
         sorted[sorted_index]=sorted[sorted_index+way];
-        sorted[sorted+index]=current_rank;
+        sorted[sorted_index]=current_rank;
         sorted_index=get_sorted_index(sorted,number_of_players,index);
         temp_index=sorted_index+way;
         flag=temp_index<number_of_players && temp_index>=0;
@@ -234,7 +234,7 @@ void Mtmchkin ::playRound()
         }
         else
         {
-            std::unique_ptr<Card> firstCard= m_cards.front();
+            std::unique_ptr<Card> firstCard=std::move( m_cards.front());
             printTurnStartMessage(std::string(m_players[i]->getName()));
             firstCard->applyEncounter(*m_players[i]);
             m_cards.push(firstCard);
@@ -254,11 +254,11 @@ void Mtmchkin ::playRound()
 void Mtmchkin::printLeaderBoard() const
 {
     int i=1;
-    std::unique_ptr<Player> current_player;
+
     printLeaderBoardStartMessage();
     while(i<m_playersNumber)
     {
-        current_player=m_players[m_sorted[i-1]];
+        std::unique_ptr<Player> current_player =std::move(m_players[m_sorted[i-1]]);
         printPlayerLeaderBoard(i, *current_player);
         i++;
     }
