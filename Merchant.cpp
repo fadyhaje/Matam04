@@ -7,7 +7,7 @@ Merchant ::Merchant ()
   m_hp = DEFAULT_HP_FOR_MERCHANT;
 }
 
-static void checker_1(Player& player){
+ void Merchant ::checker_1(Player& player){
   if(player.getCoins()<HP_PRICE_FOR_MERCHANT)
   {
     printMerchantInsufficientCoins(std::cout);
@@ -27,7 +27,7 @@ void Merchant ::printInfo(std::ostream& os) const
   printEndOfCardDetails(os);
 }
 
-static void checker_2(Player& player){
+void Merchant ::checker_2(Player& player){
   if(player.getCoins()<FORCE_PRICE_FOR_MERCHANT)
   {
     printMerchantInsufficientCoins(std::cout);
