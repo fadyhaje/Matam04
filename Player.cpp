@@ -4,7 +4,7 @@
 #include "Healer.h"
 #include "Warrior.h"
 
-using std::string; 
+using std::string;
 
 Player :: Player(const string name){
     this->m_name = name;
@@ -24,6 +24,12 @@ int Player::getLevel() const{
     return m_level;
 }
 
+int Player::getCoins() const{
+    return m_coins;
+}
+string Player::getName() const{
+    return m_name;
+}
 Player::~Player(){}
 
 void Player::buff(int addedForce){
@@ -34,26 +40,26 @@ void Player::buff(int addedForce){
 }
 
 std::ostream& operator<<(std::ostream& os,const Player& player){
-    
+
     const Ninja* temp_ninja=dynamic_cast<const Ninja*>(&player);
     const Healer* temp_Healer = dynamic_cast<const Healer*>(&player);
     const Warrior* temp_warrior = dynamic_cast<const Warrior*>(&player);
     if(temp_ninja != nullptr)
     {
-      printPlayerDetails(os,player.m_name,"Ninja",player.m_level,player.m_force,player.m_HP,player.m_coins);
+        printPlayerDetails(os,player.m_name,"Ninja",player.m_level,player.m_force,player.m_HP,player.m_coins);
     }
     else if(temp_warrior != nullptr)
     {
-      printPlayerDetails(os,player.m_name,"Warrior",player.m_level,player.m_force,player.m_HP,player.m_coins);
+        printPlayerDetails(os,player.m_name,"Warrior",player.m_level,player.m_force,player.m_HP,player.m_coins);
     }
-    else if(temp_healer != nullptr){
-      printPlayerDetails(os,player.m_name,"Healer",player.m_level,player.m_force,player.m_HP,player.m_coins);
+    else if(temp_Healer != nullptr){
+        printPlayerDetails(os,player.m_name,"Healer",player.m_level,player.m_force,player.m_HP,player.m_coins);
     }
-    return os;    
+    return os;
 }
 
 Player :: Player (const Player& other)
-{    
+{
     this->m_name=other.m_name;
     m_level = other.m_level ;
     m_force = other.m_force ;
