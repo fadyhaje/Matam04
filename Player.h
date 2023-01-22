@@ -6,7 +6,7 @@
 #include <iostream> 
 #define DEFAULT_MAX_HP 100
 #define DEFAULT_FORCE 5
-#define DEFAULT_MAX_HP 10
+#define DEFAULT_COINS 10
 using namespace std;
 
 class Player{
