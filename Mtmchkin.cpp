@@ -254,12 +254,10 @@ void Mtmchkin ::playRound()
 void Mtmchkin::printLeaderBoard() const
 {
     int i=1;
-
     printLeaderBoardStartMessage();
     while(i<m_playersNumber)
     {
-        std::unique_ptr<Player> current_player =std::move(m_players[m_sorted[i-1]]);
-        printPlayerLeaderBoard(i, *current_player);
+        printPlayerLeaderBoard(i, *(m_players[m_sorted[i-1]]));
         i++;
     }
 }
