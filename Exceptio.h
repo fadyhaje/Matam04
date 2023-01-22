@@ -47,4 +47,4 @@ public:
       std::string m_error_line;
 };
 
-#endif // EX4_EXCEPTIONS_H
+#endif // EXCEPTIONS_H
