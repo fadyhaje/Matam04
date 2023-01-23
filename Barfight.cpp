@@ -5,9 +5,9 @@
 
 
 
-Barfight ::Barfight():m_damage(DEFAULT_DAMAGE_BARFIGHT)
+Barfight ::Barfight():m_damage(DEFAULT_DAMAGE_FOR_BARFIGHT)
 {
-} 
+}
 
 void Barfight ::applyEncounter(Player& player) const
 {
@@ -28,6 +28,6 @@ void Barfight::printInfo(std::ostream& os) const
 }
 
 Card* Barfight::clone() const
-{ 
-    return new Barfight(*this);  
+{
+    return new Barfight(*this);
 }
