@@ -7,12 +7,15 @@ using std::cout;
 
 int main()
 {
+   
+    int counter=0;
     try{
         Mtmchkin game("deck.txt");
-        while(game.isGameOver()==false)
+        while(game.isGameOver()==false && counter<100)
         {
-           game.playRound();
-           game.printLeaderBoard();
+            game.playRound();
+            game.printLeaderBoard();
+            counter++;
         }
     }
     catch(const DeckFileNotFound& e){
