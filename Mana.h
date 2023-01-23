@@ -1,17 +1,18 @@
 #ifndef Mana_H
 #define Mana_H
 
-#define DEFAULT_HEAL_Mana 10
+#define DEFAULT_HEAL_MANA 10
 
-#include "Card.h" 
+#include "Card.h"
 #include "../Players/Healer.h"
 #include "../utilities.h"
 
 class Mana : public Card{
-    public:
+public:
     /*
     * Constructor of Mana class
-    *
+     @return
+ * *      A new Mana object
     * 
     */
     Mana();
@@ -24,7 +25,6 @@ class Mana : public Card{
 
     ~Mana()=default;
 
-    void applyEncounter(Player& player) const override; 
 
     /*
     *
@@ -42,7 +42,10 @@ class Mana : public Card{
     */
     void printInfo(std::ostream& os ) const override;
 
-    private:
+    void applyEncounter(Player& player) const override;
+
+
+private:
     int m_heal;
 };
 
