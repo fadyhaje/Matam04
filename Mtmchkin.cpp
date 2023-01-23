@@ -32,10 +32,10 @@ static bool check_players_class(string player_class,string name, std::unique_ptr
 
 Mtmchkin:: Mtmchkin(const std::string &fileName){
     m_roundsNumber=0;
-    //  int  countNumOfCards=0;
+     int  countNumOfCards=0;
     printStartGameMessage();
 
-    /*   ifstream source(fileName);
+      ifstream source(fileName);
        if (!source) {
            throw DeckFileNotFound();
        }
@@ -65,9 +65,8 @@ Mtmchkin:: Mtmchkin(const std::string &fileName){
        if (countNumOfCards<MIN_CARDS_NUM){
            throw DeckFileInvalidSize();
        }
-   */
+   
 
-    m_cards.push(std::unique_ptr<Gremlin>(new Gremlin()));  m_cards.push(std::unique_ptr<Gremlin>(new Gremlin()));  m_cards.push(std::unique_ptr<Merchant>(new Merchant()));  m_cards.push(std::unique_ptr<Merchant>(new Merchant()));  m_cards.push(std::unique_ptr<Dragon>(new Dragon()));
     m_playersNumber=check_players_amount();
     check_players_everthing(m_players,m_playersNumber);
     for(int i=0;i<m_playersNumber;i++){
