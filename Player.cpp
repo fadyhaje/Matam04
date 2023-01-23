@@ -30,7 +30,6 @@ int Player::getCoins() const{
 string Player::getName() const{
     return m_name;
 }
-Player::~Player(){}
 
 void Player::buff(int addedForce){
     if(addedForce>=0)
@@ -58,29 +57,7 @@ std::ostream& operator<<(std::ostream& os,const Player& player){
     return os;
 }
 
-Player :: Player (const Player& other)
-{
-    this->m_name=other.m_name;
-    m_level = other.m_level ;
-    m_force = other.m_force ;
-    m_maxHP = other.m_maxHP ;
-    m_HP = other.m_HP ;
-    m_coins = other.m_coins ;
-}
 
-Player& Player::operator=(const Player& other) {
-    if (this == &other)
-    {
-        return *this;
-    }
-    m_name=other.m_name;
-    m_level = other.m_level ;
-    m_force = other.m_force ;
-    m_maxHP = other.m_maxHP ;
-    m_HP = other.m_HP ;
-    m_coins = other.m_coins ;
-    return *this;
-}
 
 void Player::heal(int addedHP){
     if(addedHP>=0)
