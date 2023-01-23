@@ -159,7 +159,7 @@ static void check_players_everthing(std::unique_ptr<Player> players[],int player
      std::string players_everything;
     string player_name;
     string player_class;
-    bool valid_class= false,valid_name=false;
+    bool available_name= false,available_class=false;
     int temp=0;
     while(temp<players_num)
     {
@@ -177,8 +177,8 @@ static void check_players_everthing(std::unique_ptr<Player> players[],int player
                 valid_name=false;
             }
         }
-        available_class=false;
         available_name=false;
+        available_class=false;
         temp++;
     }
 }
