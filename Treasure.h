@@ -1,18 +1,20 @@
 #ifndef Treasure_H
 #define Treasure_H
 
-#include "Card.h" 
+#include "Card.h"
 #include "../utilities.h"
 
-#define DEFAULT_COINS_TREASURE 10
+#define DEFAULT_COINS_FOR_TREASURE 10
 
 class Treasure : public Card{
-    public:
+public:
     /*
     * Constructor of Treasure class
     *
+     @return
+  *      A new Treasure object
     *
-    */
+     * */
     Treasure();
 
     /*
@@ -22,8 +24,15 @@ class Treasure : public Card{
     */
     ~Treasure()=default ;
 
+    /*
+   *
+   *prints the information of the card
+   *
+   */
+    void printInfo(std::ostream& os ) const override;
 
-    void applyEncounter(Player& player) const override; 
+
+    void applyEncounter(Player& player) const override;
 
     /*
     *
@@ -34,14 +43,15 @@ class Treasure : public Card{
     */
     Card* clone() const override;
 
-    /*
-    *
-    *prints the information of the card
-    *
-    */
-    void printInfo(std::ostream& os ) const override;
 
-    private:
+    /*
+  * Destructor of Treasure class
+  *
+  *
+  */
+    ~Treasure()=default ;
+
+private:
     int m_loot ;
 };
 
