@@ -21,8 +21,11 @@ public:
     virtual ~Card() ;
 
 
+    friend std::ostream& operator<<(std::ostream& os,const Card& card);
+    
     virtual void applyEncounter(Player& player) const=0;
 
+    
 
     virtual Card* clone() const = 0;
 
@@ -34,7 +37,7 @@ public:
     virtual void printInfo(std::ostream& os ) const=0;
 
 
-    friend std::ostream& operator<<(std::ostream& os,const Card& card);
+    
 
 
 
