@@ -9,22 +9,23 @@
 
 
 class Well : public Card{
-    public:
+public:
     /*
     * Constructor of Well class
-    *
+     * @return
+     * A new Well object
     *
     */
     Well();
 
     /*
-    * Destructor of Well class
+    * Default destructor of Well class
     *
     *
     */
-   ~Well()=default;
+    ~Well()=default;
 
-    void applyEncounter(Player& player) const override; 
+    void applyEncounter(Player& player) const override;
 
     /*
     * create a new copy of Well using the copy c’tor
@@ -41,7 +42,7 @@ class Well : public Card{
     */
     void printInfo(std::ostream& os ) const override;
 
-    private:
+private:
     int m_damage;
 };
 
