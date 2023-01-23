@@ -1,23 +1,22 @@
 #include "Treasure.h"
 
-Treasure ::Treasure():m_loot(DEFAULT_COINS_TREASURE)
+Treasure ::Treasure():m_loot(DEFAULT_COINS_FOR_TREASURE)
 {
 }
 
-void Treasure ::applyEncounter(Player& player) const
+Card* Treasure::clone() const
 {
-   player.addCoins(m_loot);
-   printTreasureMessage();
+    return new Treasure(*this);
 }
+
 
 void Treasure ::printInfo(std::ostream& os) const
 {
-   printCardDetails(os,"Treasure");
-   printEndOfCardDetails(os);
+    printCardDetails(os,"Treasure");
+    printEndOfCardDetails(os);
 }
-
-Card* Treasure::clone() const 
-{ 
-   return new Treasure(*this);
+void Treasure ::applyEncounter(Player& player) const
+{
+    player.addCoins(m_loot);
+    printTreasureMessage();
 }
-
