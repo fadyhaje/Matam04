@@ -9,7 +9,7 @@
 #define HP_PRICE 5
 #define FORCE_PRICE 10
 #define DEFAULT_HP 1
-#define DEFAULT_FORCE 1
+#define DEFAULT_FORCE_FOR_MERCHANT 1
 
 class Merchant : public Card{
 public:
