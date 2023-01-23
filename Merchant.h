@@ -1,37 +1,39 @@
 #ifndef Merchant_H
 #define Merchant_H
 
-#include "Card.h" 
+#include "Card.h"
 #include <iostream>
 #include <stdbool.h>
 #include "../utilities.h"
 
-#define HP_PRICE_FOR_MERCHANT 5
-#define FORCE_PRICE_FOR_MERCHANT 10
-#define DEFAULT_HP_FOR_MERCHANT 1
-#define DEFAULT_FORCE_FOR_MERCHANT 1
+#define HP_PRICE 5
+#define FORCE_PRICE 10
+#define DEFAULT_HP 1
+#define DEFAULT_FORCE 1
 
 class Merchant : public Card{
-    public:
+public:
     /*
-    * Constructor of Merchant class
+    * C'tor of Mtmchkin class
     *
-    * 
-    * 
+    * @return
+    *      A new Merchant object.
     */
     Merchant();
 
-    /*
-    * Destructor of Merchant class
-    *
-    * 
-    */
-    ~Merchant()=default;
 
     void applyEncounter(Player& player) const override;
+    /*
+    *
+    *prints the card's information- according to the instruction in the exercise document.
+    *
+    * @return
+    *      void
+    */
+    void printInfo(std::ostream& os ) const override;
 
     /*
-    * create a new copy of Merchant using the copy c’tor
+    * create a new copy of Merchant by using the copy constructor
     *
     * return:
     *   pointer to a copy of Merchant
@@ -39,13 +41,13 @@ class Merchant : public Card{
     Card* clone() const override;
 
     /*
-    *
-    *prints the information of the card
-    *
-    */
-    void printInfo(std::ostream& os ) const override;
+   * Destructor of Merchant class
+   *
+   *
+   */
+    ~Merchant()=default;
 
-    private:
+private:
     void checker_1(Player& player) const;
     void checker_2(Player& player) const;
     int m_hp;
