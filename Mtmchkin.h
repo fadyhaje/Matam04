@@ -23,8 +23,9 @@ using std::string;
 using std::ifstream;
 using std::ostream;
 
-#define MAX_NUM_OF_PLAYERS 6
 #define MIN_NUM_OF_PLAYERS 2
+#define MAX_NUM_OF_PLAYERS 6
+
 
 class Mtmchkin{
 
@@ -78,9 +79,9 @@ public:
 private:
     int m_playersNumber;
     int m_roundsNumber;
-    std::queue<std::unique_ptr<Card>> m_cards;
+     int m_sorted[MAX_NUM_OF_PLAYERS];
     std::unique_ptr<Player> m_players[MAX_NUM_OF_PLAYERS];
-    int m_sorted[MAX_NUM_OF_PLAYERS];
+    std::queue<std::unique_ptr<Card>> m_cards;
 };
 
 
