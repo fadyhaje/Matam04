@@ -9,18 +9,19 @@
 #define DEFAULT_LOOT_Witch 2
 #define DEFAULT_DAMAGE_Witch 10
 
-class Witch : public BattleCard{ 
-    public:
+class Witch : public BattleCard{
+public:
     /*
     * Constructor of Witch class
     *creates a Witch with:
     *         force:10 , loot:2,  damage ability:10.
-    * 
+    *  @return
+     * A new Witch object
     */
     Witch();
 
     /*
-    * Destructor of Witch class
+    * Defaault Destructor of Witch class
     *
     * 
     */
@@ -34,7 +35,7 @@ class Witch : public BattleCard{
     void printInfo(std::ostream& os ) const override;
 
 
-    void applyEncounter(Player& player) const override; 
+    void applyEncounter(Player& player) const override;
 
     /*
     *
