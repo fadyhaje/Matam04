@@ -5,8 +5,8 @@ Gremlin ::Gremlin():BattleCard(DEFAULT_FORCE_Gremlin,DEAFULT_LOOT_Gremlin,DEFAUL
 {
 }
 
-void Gremlin :: applyEncounter(Player& player) const {
-
+void Gremlin :: applyEncounter(Player& player) const
+{
     if(m_force<=player.getAttackStrength())
     {
         player.addCoins(m_loot);
