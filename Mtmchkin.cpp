@@ -164,18 +164,21 @@ static void check_players_everthing(std::unique_ptr<Player> players[],int player
     while(temp<players_num)
     {
         printInsertPlayerMessage();
-        while(!valid_class){
-            while(!valid_name){
+        while(!available_class)
+        {
+            while(!available_name)
+            {
                 enterPlayerDetails(players_everything,player_name,player_class);
-                valid_name=isValidPlayerName(player_name);
+                available_name=isValidPlayerName(player_name);
             }
             valid_class = check_players_class(player_class,player_name,players,temp);
-            if(!valid_class){
+            if(!available_class)
+            {
                 valid_name=false;
             }
         }
-        valid_class=false;
-        valid_name=false;
+        available_class=false;
+        available_name=false;
         temp++;
     }
 }
