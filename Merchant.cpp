@@ -1,10 +1,9 @@
 #include "Merchant.h"
 
 
-
 Merchant ::Merchant ()
 {
-    m_force = DEFAULT_FORCE;
+    m_force = DEFAULT_FORCE_FOR_MERCHANT;
     m_hp = DEFAULT_HP;
 }
 
