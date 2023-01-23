@@ -1,17 +1,17 @@
 #include "Mtmchkin.h"
 
 #include "utilities.h"
-#include "Players/Ninja.h"
 #include "Players/Healer.h"
 #include "Players/Warrior.h"
-#include "Cards/Gremlin.h"
-#include "Cards/Witch.h"
-#include "Cards/Dragon.h"
+#include "Players/Ninja.h"
 #include "Cards/Merchant.h"
 #include "Cards/Treasure.h"
 #include "Cards/Well.h"
 #include "Cards/Barfight.h"
+#include "Cards/Dragon.h"
 #include "Cards/Mana.h"
+#include "Cards/Gremlin.h"
+#include "Cards/Witch.h"
 #include "Exception.h"
 
 #define UPPER 1
@@ -25,7 +25,60 @@ using std::cin;
 using std::string;
 using std::ifstream;
 static int get_sorted_index(int sorted[],int number_of_players,int index);
+static void enterPlayerDetails(string& players_everything,string& player_name,string& player_class);
+static int  check_players_amount();
+static void check_players_everthing(std::unique_ptr<Player> players[],int players_num);
+static bool check_players_class(string player_class,string name, std::unique_ptr<Player> players[],int index);
 
+Mtmchkin:: Mtmchkin(const std::string &fileName){
+    m_roundsNumber=0;
+    //  int  countNumOfCards=0;
+    printStartGameMessage();
+
+    /*   ifstream source(fileName);
+       if (!source) {
+           throw DeckFileNotFound();
+       }
+       std::string cardName;
+       while(getline(source,cardName)){
+           if (cardName == "Gremlin") {
+               m_cards.push(std::unique_ptr<Gremlin>(new Gremlin()));
+           } else if (cardName == "Witch") {
+               m_cards.push(std::unique_ptr<Witch>(new Witch()));
+           } else if (cardName == "Dragon") {
+               m_cards.push(std::unique_ptr<Dragon>(new Dragon()));
+           } else if (cardName == "Merchant") {
+               m_cards.push(std::unique_ptr<Merchant>(new Merchant()));
+           } else if (cardName == "Treasure") {
+               m_cards.push(std::unique_ptr<Treasure>(new Treasure()));
+           } else if (cardName == "Well") {
+               m_cards.push(std::unique_ptr<Well>(new Well()));
+           } else if (cardName == "Barfight") {
+               m_cards.push(std::unique_ptr<Barfight>(new Barfight()));
+           } else if (cardName == "Mana") {
+               m_cards.push(std::unique_ptr<Mana>(new Mana()));
+           }else{
+               throw DeckFileFormatError(countNumOfCards);
+           }
+           countNumOfCards++;
+       }
+       if (countNumOfCards<MIN_CARDS_NUM){
+           throw DeckFileInvalidSize();
+       }
+   */
+
+    m_cards.push(std::unique_ptr<Gremlin>(new Gremlin()));  m_cards.push(std::unique_ptr<Gremlin>(new Gremlin()));  m_cards.push(std::unique_ptr<Merchant>(new Merchant()));  m_cards.push(std::unique_ptr<Merchant>(new Merchant()));  m_cards.push(std::unique_ptr<Dragon>(new Dragon()));
+    m_playersNumber=check_players_amount();
+    check_players_everthing(m_players,m_playersNumber);
+    for(int i=0;i<m_playersNumber;i++){
+        m_sorted[i]=i;
+    }
+}
+
+int Mtmchkin ::getNumberOfRounds() const
+{
+    return m_roundsNumber;
+}
 static bool check_players_class(string player_class,string name, std::unique_ptr<Player> players[],int index){
     if(player_class=="Ninja")
     {
@@ -66,8 +119,8 @@ static int  check_players_amount(){
     int numOfPlayers;
     for(int i=1;i>0;i++){
         printEnterTeamSizeMessage();
-        cin >> get_num;
-        try{
+        std::getline(std::cin, get_num);
+try{
             numOfPlayers=std::stoi(get_num);
         }
         catch(...){
@@ -85,8 +138,8 @@ static int  check_players_amount(){
 
 static bool islegalchars(string& name)
 {
-    for (int i = 0; i < name.size(); ++i) {
-        if(!(name[i]<='z'&& name[i]>='a') && !(name[i]<='Z'&& name[i]>='A'))
+    for (int i = 0; (unsigned)i < name.size(); ++i) {
+        if(!(name[i]<='z'&&name[i]>='a')&&!(name[i]<='Z'&&name[i]>='A'))
             return false;
     }
     return true;
@@ -103,70 +156,57 @@ static bool isValidPlayerName(string& playerName){
 }
 
 static void check_players_everthing(std::unique_ptr<Player> players[],int players_num){
-    std::string player_Details;
-    std::string current_name;
-    std::string current_job;
+     std::string players_everything;
+    string player_name;
+    string player_class;
     bool valid_class= false,valid_name=false;
-    for(int i=0;i<players_num;i++){
+    int temp=0;
+    while(temp<players_num)
+    {
         printInsertPlayerMessage();
         while(!valid_class){
             while(!valid_name){
-                std::getline(std::cin, player_Details);
-                std::size_t ch=player_Details.find(" ",0);
-                current_name= player_Details.substr(0,ch);
-                current_job=player_Details.substr(ch+1);
-                valid_name=isValidPlayerName(current_name);
+                enterPlayerDetails(players_everything,player_name,player_class);
+                valid_name=isValidPlayerName(player_name);
             }
-            valid_class = check_players_class(current_job,current_name,players,i);
+            valid_class = check_players_class(player_class,player_name,players,temp);
             if(!valid_class){
                 valid_name=false;
             }
         }
         valid_class=false;
         valid_name=false;
+        temp++;
     }
 }
 
 
-Mtmchkin:: Mtmchkin(const std::string &fileName){
-    printStartGameMessage();
-  int  m_roundsNumber=0,countNumOfCards=0;
-    ifstream source(fileName);
-    if (!source) {
-        throw DeckFileNotFound();
-    }
-    std::string cardName;
-    while(getline(source,cardName)){
-        if (cardName == "Gremlin") {
-            m_cards.push(std::unique_ptr<Gremlin>(new Gremlin()));
-        } else if (cardName == "Witch") {
-            m_cards.push(std::unique_ptr<Witch>(new Witch()));
-        } else if (cardName == "Dragon") {
-            m_cards.push(std::unique_ptr<Dragon>(new Dragon()));
-        } else if (cardName == "Merchant") {
-            m_cards.push(std::unique_ptr<Merchant>(new Merchant()));
-        } else if (cardName == "Treasure") {
-            m_cards.push(std::unique_ptr<Treasure>(new Treasure()));
-        } else if (cardName == "Well") {
-            m_cards.push(std::unique_ptr<Well>(new Well()));
-        } else if (cardName == "Barfight") {
-            m_cards.push(std::unique_ptr<Barfight>(new Barfight()));
-        } else if (cardName == "Mana") {
-            m_cards.push(std::unique_ptr<Mana>(new Mana()));
-        }else{
-            throw DeckFileFormatError(countNumOfCards);
+
+bool Mtmchkin ::isGameOver() const
+{
+    int i=0;
+    bool flag=false;
+    while(i<m_playersNumber)
+    {
+        if((m_players[i]->isKnockedOut()==false) &&(m_players[i]->getLevel()<MAX_LEVEL))
+        {
+            flag=true;
+            break;
         }
-        countNumOfCards++;
+        else
+        {
+            i++;
+            continue;
+        }
     }
-    if (countNumOfCards<MIN_CARDS_NUM){
-        throw DeckFileInvalidSize();
+    if(flag==true)
+    {
+        return false;
     }
-    m_playersNumber=check_players_amount();
-    check_players_everthing(m_players,m_playersNumber);
-    for(int i=0;i<m_playersNumber;i++){
-        m_sorted[i]=i;
-    }
+    // printGameEndMessage();
+    return true;
 }
+
 
 
 static void players_new_sort(std::unique_ptr<Player> players[],int sorted[],int number_of_players,int index)
@@ -188,19 +228,20 @@ static void players_new_sort(std::unique_ptr<Player> players[],int sorted[],int 
     int temp_index=sorted_index+way,current_rank;
     bool flag=temp_index<number_of_players && temp_index>=0;
     while(flag){
-        if(!((players[sorted[sorted_index]]->isKnockedOut()==false) && (players[sorted[sorted_index]]->getLevel()<MAX_LEVEL)))
+        if(!((players[sorted[temp_index]]->isKnockedOut()==false) && (players[sorted[temp_index]]->getLevel()<MAX_LEVEL)))
         {
             break;
         }
         current_rank=sorted[sorted_index];
         sorted[sorted_index]=sorted[sorted_index+way];
-        sorted[sorted_index]=current_rank;
+        sorted[sorted_index+way]=current_rank;
         sorted_index=get_sorted_index(sorted,number_of_players,index);
         temp_index=sorted_index+way;
         flag=temp_index<number_of_players && temp_index>=0;
     }
     return;
 }
+
 
 static int get_sorted_index(int sorted[],int number_of_players,int index)
 {
@@ -256,41 +297,22 @@ void Mtmchkin::printLeaderBoard() const
     int i=1;
 
     printLeaderBoardStartMessage();
-    while(i<m_playersNumber)
+    while(i<=m_playersNumber)
     {
         printPlayerLeaderBoard(i, *(m_players[m_sorted[i-1]]));
         i++;
     }
 }
 
-bool Mtmchkin ::isGameOver() const
-{
-    int i=0;
-    bool flag=false;
-    while(i<m_playersNumber)
-    {
-        if((m_players[i]->isKnockedOut()==false) &&(m_players[i]->getLevel()<MAX_LEVEL))
-        {
-            flag=true;
-            break;
-        }
-        else
-        {
-            i++;
-            continue;
-        }
-    }
-    if(flag==true)
-    {
-        return false;
-    }
-    printGameEndMessage();
-    return true;
-}
 
 
-int Mtmchkin ::getNumberOfRounds() const
+static void enterPlayerDetails(string& players_everything,string& player_name,string& player_class)
 {
-    return m_roundsNumber;
+
+    std::getline(std::cin, players_everything);
+    std::size_t ch=players_everything.find(" ",0);
+    player_name= players_everything.substr(0,ch);
+    player_class=players_everything.substr(ch+1);
+
 }
 
