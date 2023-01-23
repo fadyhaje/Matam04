@@ -153,4 +153,3 @@ void Player ::force_damage(){
         m_force--;
     }
 }
-
