@@ -7,7 +7,8 @@ Merchant ::Merchant ()
     m_hp = DEFAULT_HP;
 }
 
-void Merchant::checker_1(Player& player) const{
+void Merchant::checker_1(Player& player) const
+{
     if(player.getCoins()<HP_PRICE)
     {
         printMerchantInsufficientCoins(std::cout);
@@ -27,7 +28,8 @@ void Merchant ::printInfo(std::ostream& os) const
     printEndOfCardDetails(os);
 }
 
- void Merchant::checker_2(Player& player) const{
+ void Merchant::checker_2(Player& player) const
+ {
     if(player.getCoins()<FORCE_PRICE)
     {
         printMerchantInsufficientCoins(std::cout);
@@ -46,7 +48,8 @@ Card* Merchant ::clone() const
     return new Merchant(*this);
 }
 
-void Merchant ::applyEncounter(Player& player) const{
+void Merchant ::applyEncounter(Player& player) const
+{
     printMerchantInitialMessageForInteractiveEncounter(std::cout,player.getName(),player.getCoins());
     bool available = false;
     int temp_input;
