@@ -6,7 +6,8 @@ Witch :: Witch() :BattleCard(DEFAULT_FORCE_Witch,DEFAULT_LOOT_Witch,DEFAULT_DAMA
 }
 
 
-void Witch :: applyEncounter(Player& player) const{
+void Witch :: applyEncounter(Player& player) const
+{
     if(m_force <= player.getAttackStrength())
     {
         player.addCoins(m_loot);
