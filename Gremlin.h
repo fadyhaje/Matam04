@@ -1,7 +1,7 @@
 #ifndef Gremlin_H
 #define Gremlin_H
 
-#include "BattleCard.h" 
+#include "BattleCard.h"
 #include <iostream>
 #include "../utilities.h"
 
@@ -9,33 +9,24 @@
 #define DEAFULT_LOOT_Gremlin 2
 #define DEFAULT_DAMAGE_Gremlin 10
 
-class Gremlin : public BattleCard{  
-    public:
+class Gremlin : public BattleCard{
+public:
 
     /*
     * Constructor of Gremlin class
     *
     *creates a new Gremlin with:
     *     force:6, loot:2, damage ability:10
+    *      @return
+    *      A new Gremlin object
     */
     Gremlin();
 
-    /*
-    * Destructor of Gremlin class
-    *
-    * 
-    */
-    ~Gremlin()=default;
-
-    /*
-    *
-    *prints the information of the card
-    *
-    */
-    void printInfo(std::ostream& os ) const override;
 
 
-    void applyEncounter(Player& player) const override; 
+
+
+    void applyEncounter(Player& player) const override;
 
 
     /*
@@ -46,7 +37,20 @@ class Gremlin : public BattleCard{
     */
     Card* clone() const override;
 
+    /*
+   *
+   *prints the information of the card
+   *
+   */
+    void printInfo(std::ostream& os ) const override;
+
+    /*
+  * Destructor of Gremlin class
+  *
+  *
+  */
+    ~Gremlin()=default;
+
 };
 
 #endif //Gremlin_H
-
