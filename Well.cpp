@@ -1,49 +1,29 @@
-#ifndef Well_H
-#define Well_H
+#include "well.h"
 
-#include "Card.h"
-#include "../utilities.h"
-#include "../Players/Ninja.h"
-
-#define DEFAULT_DAMAGE_Well 10
+Well ::Well()
+{
+    m_damage = DEFAULT_DAMAGE_Well;
+}
 
 
-class Well : public Card{
-public:
-    /*
-    * Constructor of Well class
-     * @return
-     * A new Well object
-    *
-    */
-    Well();
+void Well :: applyEncounter(Player& player)const
+{
+    const Ninja* ninja = dynamic_cast<const Ninja*>(&player);
+    if(ninja !=nullptr){
+        printWellMessage(true);
+        return;
+    }
+    player.damage(m_damage);
+    printWellMessage(false);
+}
 
-    /*
-    * Default destructor of Well class
-    *
-    *
-    */
-    ~Well()=default;
+void Well::printInfo(std::ostream& os ) const
+{
+    printCardDetails(os,"Well");
+    printEndOfCardDetails(os);
+}
 
-    void applyEncounter(Player& player) const override;
-
-    /*
-    * create a new copy of Well using the copy c’tor
-    *
-    * return:
-    *   pointer to a copy of Well
-    */
-    Card* clone() const override;
-
-    /*
-    *
-    *prints the information of the card
-    *
-    */
-    void printInfo(std::ostream& os ) const override;
-
-private:
-    int m_damage;
-};
-
-#endif //Well_H
+Card* Well::clone() const
+{
+    return new Well(*this);
+}
