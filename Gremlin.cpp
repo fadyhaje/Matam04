@@ -2,11 +2,11 @@
 
 
 Gremlin ::Gremlin():BattleCard(DEFAULT_FORCE_Gremlin,DEAFULT_LOOT_Gremlin,DEFAULT_DAMAGE_Gremlin)
-{  
+{
 }
 
 void Gremlin :: applyEncounter(Player& player) const {
-    
+
     if(m_force<=player.getAttackStrength())
     {
         player.addCoins(m_loot);
@@ -26,6 +26,6 @@ void Gremlin::printInfo(std::ostream& os ) const
 }
 
 Card* Gremlin::clone() const
-{ 
-    return new Gremlin(*this);  
+{
+    return new Gremlin(*this);
 }
