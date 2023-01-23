@@ -17,7 +17,8 @@ void Mana :: applyEncounter(Player& player) const
     printManaMessage(false);
 }
 
-void Mana::printInfo(std::ostream& os ) const{
+void Mana::printInfo(std::ostream& os ) const
+{
     printCardDetails(os,"Mana");
     printEndOfCardDetails(os);
 }
