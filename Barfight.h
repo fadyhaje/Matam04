@@ -3,17 +3,17 @@
 
 
 
-#define DEFAULT_DAMAGE_BARFIGHT 10
+#define DEFAULT_DAMAGE_FOR_BARFIGHT 10
 #include "Card.h"
 
 
 class Barfight : public Card{
-    public:
+public:
     /*
     * Constructor of Barfight class
     *
-    *
-    * 
+    @return
+    *      A new Barfight object
     */
     Barfight();
 
@@ -22,7 +22,7 @@ class Barfight : public Card{
     *
     *
     */
-    void applyEncounter(Player& player) const override; 
+    void applyEncounter(Player& player) const override;
 
     /*
     * create a new copy of barfight using the copy c’tor
@@ -44,7 +44,7 @@ class Barfight : public Card{
     */
     ~Barfight()=default;
 
-    private:
+private:
     int m_damage;
 };
 
